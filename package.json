@@ -1,7 +1,7 @@
 {
   "name": "responsio",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "build/index.js",
   "repository": "https://github.com/surapich/responsio.git",
   "author": "Surapich Chairgulprasert <csurapich@gmail.com>",
   "license": "MIT",

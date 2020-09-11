@@ -1,0 +1,11 @@
+{
+  "name": "responsio",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/surapich/responsio.git",
+  "author": "Surapich Chairgulprasert <csurapich@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.0.2"
+  }
+}

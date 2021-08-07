@@ -18,8 +18,14 @@ type StatusCodes = 200 | 201 | 400 | 401 | 403 | 405 | 500 | 502;
 declare global {
   namespace Express {
     interface Response {
-      respond(data: any): any;
-      respond(data: any, resultCode: number): any;
+      respond(resultCode: number, msg: string): any;      
+      respond(resultCode: string, msg: string): any;
+      respond(resultCode: number, msg: string, data: any): any;
+      respond(resultCode: string, msg: string, data: any): any;
+
+      /**
+      * @deprecated Since version 1.0. Will be deleted in version 3.0. Use respond instead
+      */
       reject(errors: ResponseError[]): any;
     }
   }
@@ -52,30 +58,29 @@ export const expressMiddleware = () => (
   res: Response,
   next: any
 ): void => {
-  res.respond = (data?: any, resultCode: number = 0): void => {
-    if (!data) {
-      let error = new Error("Message is empty");
+  res.respond = (
+    resultCode: number | string,
+    msg: string,
+    data?: any
+  ): void => {
+    // * Construct response message
+    let responseMessage = {
+      code: resultCode,
+      msg,
+      data,
+    };
 
-      res.status(502);
-      res.send({
-        data: null,
-        errors: [
-          {
-            message: error.message,
-            stacktrace: error.stack,
-          },
-        ],
-      });
-      return;
+    if (!data) {
+      delete responseMessage.data;
     }
 
-    res.send({
-      result: resultCode,
-      data,
-    });
+    res.send(responseMessage);
     return;
   };
 
+  /**
+   * @deprecated Since version 1.0. Will be deleted in version 3.0. Use respond instead
+   */
   res.reject = (errors: ResponseError[], statusCode?: number) => {
     res.status(502);
     res.send({

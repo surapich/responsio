@@ -1,6 +1,6 @@
 {
   "name": "responsio",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "repository": "https://github.com/surapich/responsio.git",
@@ -12,6 +12,7 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lodash": "^4.17.21"
   }
 }
